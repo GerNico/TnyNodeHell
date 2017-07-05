@@ -46,36 +46,35 @@ class ListNode {
 
     static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         final int maxVal=10;
-        ListNode currentNodeL1,currentNodeL2;
         if (l1 == null&&l2==null) {System.out.print("both lists are empty");return null;}
         if (l1 == null) {return l2;}
         if (l2 == null) {return l1;}
-        currentNodeL1=l1;currentNodeL2=l2;int valDiv=0,valMod=0;//todo: make cloning
+        int valDiv=0,valMod=0;
         ListNode result=null;
         do {
-            if (currentNodeL1!=null&&currentNodeL2!=null){
-                valMod=(currentNodeL1.getVal()+currentNodeL2.getVal()+valDiv)%maxVal;
-                valDiv=(currentNodeL1.getVal()+currentNodeL2.getVal()+valDiv)/maxVal;
+            if (l1!=null&&l2!=null){
+                valMod=(l1.getVal()+l2.getVal()+valDiv)%maxVal;
+                valDiv=(l1.getVal()+l2.getVal()+valDiv)/maxVal;
 
                 if(result==null){result=new ListNode(valMod,null);}
                 else{result.addLast(valMod,null);}
 
-                currentNodeL1=currentNodeL1.getNext();
-                currentNodeL2=currentNodeL2.getNext();
+                l1=l1.getNext();
+                l2=l2.getNext();
             }
-            if (currentNodeL1!=null&&currentNodeL2==null){
-                valMod=(currentNodeL1.getVal()+valDiv)%maxVal;
-                valDiv=(currentNodeL1.getVal()+valDiv)/maxVal;
+            if (l1!=null&&l2==null){
+                valMod=(l1.getVal()+valDiv)%maxVal;
+                valDiv=(l1.getVal()+valDiv)/maxVal;
                 result.addLast(valMod,null);
-                currentNodeL1 = currentNodeL1.getNext();
+                l1 = l1.getNext();
             }
-            if (currentNodeL1==null&&currentNodeL2!=null){
-                valMod=(currentNodeL2.getVal()+valDiv)%maxVal;
-                valDiv=(currentNodeL2.getVal()+valDiv)/maxVal;
+            if (l1==null&&l2!=null){
+                valMod=(l2.getVal()+valDiv)%maxVal;
+                valDiv=(l2.getVal()+valDiv)/maxVal;
                 result.addLast(valMod,null);
-                currentNodeL2 = currentNodeL2.getNext();
+                l2 = l2.getNext();
             }
-            if (currentNodeL1==null&&currentNodeL2==null){
+            if (l1==null&&l2==null){
                 if (valDiv!=0)result.addLast(valMod,null);
                 break;
             }
