@@ -30,7 +30,8 @@ public class Main {
         listOne = new ListNode(2, new ListNode(4, new ListNode(3, null)));
         System.out.print(" The list one: ");listOne.printlnMe();
         System.out.print(" The list two: ");listTwo.printlnMe();
-        System.out.print(" The list sum: ");addTwoNumbers(listOne,listTwo).printlnMe();
+        System.out.print(" The list sum: ");
+        ListNode answer=addTwoNumbers(listOne,listTwo);if (answer!=null)answer.printlnMe();
         System.out.println();
     }
 
