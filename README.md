@@ -22,10 +22,8 @@
  
  Solution
  ---------
- 
-My solution contains two classes Main and ListNode. ListNode class contains the solution namely and Main class just use ListNode to test it.
-ListNode class contains:
-* ListNode structure and its constructor
-* method addLast, it allows inserting an element at the end of the list
-* method printlnMe, it's method for list printing
-* method addTwoNumbers(ListNode l1, ListNode l2), that was required.
+ My solution contains two classes TinyNodeHell and ListNode. ListNode class is a pitiful class from the task. The other class is created in order to overcome problems made by ListNode. Moreover, TinyNodeHell allows to: 
+ * easily construct list ```static ListNode buildListNode(int... ints)```
+ * insert number in the end of list ```static void addLast(int n, ListNode node)```
+ * method printing the list ```static void printlnNode(ListNode node)```
+ * method that adding lists according to the task ```static ListNode addTwoNumbers(ListNode l1, ListNode l2)```.
