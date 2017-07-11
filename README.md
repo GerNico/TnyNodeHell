@@ -22,8 +22,10 @@
  
  Solution
  ---------
- My solution contains two classes TinyNodeHell and ListNode. ListNode class is a pitiful class from the task. The other class is created in order to overcome problems made by ListNode. Moreover, TinyNodeHell allows to: 
+ My solution contains two classes TinyNodeHell and ListNode. ListNode class is a pitiful class from the task. 
+ The other class is created in order to overcome problems made by ListNode. Moreover, TinyNodeHell allows to: 
  * easily construct list ```static ListNode buildListNode(int... ints)```
  * insert number in the end of list ```static void addLast(int n, ListNode node)```
- * method printing the list ```static void printlnNode(ListNode node)```
- * method that adding lists according to the task ```static ListNode addTwoNumbers(ListNode l1, ListNode l2)```.
+ * print the list ```static void printlnNode(ListNode node)```
+ * add lists according to the task ```static ListNode addTwoNumbers(ListNode l1, ListNode l2)```
+ * check are the lists equal ```static boolean areEqual(ListNode node1, ListNode node2)```

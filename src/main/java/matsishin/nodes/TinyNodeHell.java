@@ -1,31 +1,31 @@
 package matsishin.nodes;
 
-public class TinyNodeHell {
-    public static void main(String[] args) {
-        ListNode listOne = buildListNode(2,4,3);
-        ListNode listTwo = buildListNode(5,6,4);
-        System.out.print("The list one: ");printlnNode(listOne);
-        System.out.print("The list two: ");printlnNode(listTwo);
-        addLast(9,listTwo);
-        System.out.println("The list2 with insertion 9 in the end: ");
-        printlnNode(listTwo);
-        listTwo = buildListNode(5,6,4);
-        System.out.println("Sum of list1 and list2: ");
-        ListNode answer=addTwoNumbers(listOne,listTwo);if (answer!=null)printlnNode(answer);
-    }
+class TinyNodeHell {
 
-    private static ListNode buildListNode(int... ints) {
+    static ListNode buildListNode(int... ints) {
         if (ints.length == 0) {
             System.out.println("your list will be empty");
             return null;
         }
         ListNode answer = new ListNode(ints[0]);
-        for (int i=1;i<ints.length;i++) {addLast(ints[i],answer);}
+        for (int i = 1; i < ints.length; i++) {
+            addLast(ints[i], answer);
+        }
         return answer;
 
     }
 
-    private static void addLast(int n, ListNode node) {
+    static boolean areEqual(ListNode node1, ListNode node2) {
+        while (true) {
+            if (node1 == null && node2 == null) return true;
+            if (node1 == null || node2 == null) return false;
+            if (node1.val != node2.val) return false;
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+    }
+
+    static void addLast(int n, ListNode node) {
         ListNode last;
         if (node.next == null) {
             last = new ListNode(n);
@@ -39,18 +39,18 @@ public class TinyNodeHell {
         }
     }
 
-    private static void printlnNode(ListNode node) {
+    static void printlnNode(ListNode node) {
         int i = 1;
         do {
             System.out.print("V" + i + "=" + node.val);
-            if (node.next!=null) System.out.print(" --> ");
+            if (node.next != null) System.out.print(" --> ");
             i++;
             node = node.next;
         } while (node != null);
         System.out.println();
     }
 
-    private static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         final int maxVal = 10;
         if (l1 == null && l2 == null) {
             System.out.print("both lists are empty");
@@ -70,7 +70,7 @@ public class TinyNodeHell {
                 valDiv = (l1.val + l2.val + valDiv) / maxVal;
 
                 if (result == null) {
-                    result=new ListNode(valMod);
+                    result = new ListNode(valMod);
                 } else {
                     addLast(valMod, result);
                 }
