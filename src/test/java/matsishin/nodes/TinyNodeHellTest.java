@@ -10,16 +10,10 @@ public class TinyNodeHellTest {
     @Test
     public void nodeEqualsTest() {
         ListNode nodeOne = buildListNode(8, 9, 7);
-        ListNode nodeTwo = buildListNode(8, 9, 7);
-        assertTrue(TinyNodeHell.areEqual(nodeOne, nodeTwo));
-    }
-
-    @Test
-    public void insertTest() {
-        ListNode listNode = buildListNode(2, 4, 3);
-        addLast(9, listNode);
-        ListNode expectedList = buildListNode(2, 4, 3, 9);
-        assertTrue(TinyNodeHell.areEqual(listNode, expectedList));
+        ListNode tail= new ListNode(7);
+        ListNode midle= new ListNode(9);midle.next=tail;
+        ListNode head= new ListNode(8);head.next=midle;
+        assertTrue(TinyNodeHell.areEqual(nodeOne, head));
     }
 
     @Test
@@ -27,6 +21,15 @@ public class TinyNodeHellTest {
         ListNode listOne = buildListNode(2, 4, 3);
         ListNode listTwo = buildListNode(5, 6, 4);
         ListNode expectedList = buildListNode(7, 0, 8);
+        ListNode result = addTwoNumbers(listOne, listTwo);
+        assertTrue(TinyNodeHell.areEqual(expectedList, result));
+    }
+
+    @Test
+    public void addingSneaky() {
+        ListNode listOne = buildListNode(5, 9, 9, 9);
+        ListNode listTwo = buildListNode(5);
+        ListNode expectedList = buildListNode(0, 0, 0, 0, 1);
         ListNode result = addTwoNumbers(listOne, listTwo);
         assertTrue(TinyNodeHell.areEqual(expectedList, result));
     }

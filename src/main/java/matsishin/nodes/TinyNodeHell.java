@@ -1,17 +1,31 @@
 package matsishin.nodes;
 
+import java.util.ArrayList;
+
 class TinyNodeHell {
+    private final static int maxVal = 10;
 
     static ListNode buildListNode(int... ints) {
-        if (ints.length == 0) {
-            System.out.println("your list will be empty");
-            return null;
+        ArrayList<Integer> integers = new ArrayList<>(ints.length);
+        for (int i : ints) {
+            integers.add(i);
         }
-        ListNode answer = new ListNode(ints[0]);
-        for (int i = 1; i < ints.length; i++) {
-            addLast(ints[i], answer);
-        }
-        return answer;
+        return ListNodeRecursion(integers, null);
+
+    }
+
+    private static ListNode ListNodeRecursion(ArrayList<Integer> ints, ListNode myNode) {
+        if (ints.size() > 0 && myNode == null) {
+            ListNode answer = new ListNode(ints.get(ints.size() - 1));
+            ints.remove(ints.size() - 1);
+            return ListNodeRecursion(ints, answer);
+        } else if (ints.size() > 0) {
+            ListNode answer = new ListNode(ints.get(ints.size() - 1));
+            answer.next = myNode;
+            ints.remove(ints.size() - 1);
+            return ListNodeRecursion(ints, answer);
+        } else if (myNode != null) return myNode;
+        throw new NodeHellException("Empty node and there is no number");
 
     }
 
@@ -25,7 +39,7 @@ class TinyNodeHell {
         }
     }
 
-    static void addLast(int n, ListNode node) {
+    private static void addLast(int n, ListNode node) {
         ListNode last;
         if (node.next == null) {
             last = new ListNode(n);
@@ -39,22 +53,9 @@ class TinyNodeHell {
         }
     }
 
-    static void printlnNode(ListNode node) {
-        int i = 1;
-        do {
-            System.out.print("V" + i + "=" + node.val);
-            if (node.next != null) System.out.print(" --> ");
-            i++;
-            node = node.next;
-        } while (node != null);
-        System.out.println();
-    }
-
     static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        final int maxVal = 10;
         if (l1 == null && l2 == null) {
-            System.out.print("both lists are empty");
-            return null;
+            throw new NodeHellException("both lists are empty");
         }
         if (l1 == null) {
             return l2;
@@ -62,39 +63,37 @@ class TinyNodeHell {
         if (l2 == null) {
             return l1;
         }
-        int valDiv = 0, valMod = 0;
-        ListNode result = null;
+        int valDiv = 0, valMod;
+        ListNode result=null;
         do {
             if (l1 != null && l2 != null) {
                 valMod = (l1.val + l2.val + valDiv) % maxVal;
                 valDiv = (l1.val + l2.val + valDiv) / maxVal;
-
+                l1 = l1.next;
+                l2 = l2.next;
                 if (result == null) {
                     result = new ListNode(valMod);
                 } else {
                     addLast(valMod, result);
                 }
-
-                l1 = l1.next;
-                l2 = l2.next;
             }
             if (l1 != null && l2 == null) {
                 valMod = (l1.val + valDiv) % maxVal;
                 valDiv = (l1.val + valDiv) / maxVal;
-                addLast(valMod, result);
                 l1 = l1.next;
+                addLast(valMod, result);
             }
             if (l1 == null && l2 != null) {
                 valMod = (l2.val + valDiv) % maxVal;
                 valDiv = (l2.val + valDiv) / maxVal;
-                addLast(valMod, result);
                 l2 = l2.next;
+                addLast(valMod, result);
             }
             if (l1 == null && l2 == null) {
-                if (valDiv != 0) addLast(valMod, result);
-                break;
+                if (valDiv != 0) addLast(valDiv, result);
+                valDiv=0;
             }
-        } while (true);
+        } while (!(l1 == null && l2 == null));
         return result;
     }
 }
